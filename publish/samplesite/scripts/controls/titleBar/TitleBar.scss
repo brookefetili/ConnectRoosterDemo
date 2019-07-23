@@ -2,7 +2,7 @@
 
 .titleBar {
     display: flex;
-    background-color: $primaryColor;
+    background-color: whitesmoke;
     padding: 5px 10px;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -15,8 +15,16 @@
     font-family: Arial;
     font-weight: bold;
     font-style: italic;
-    color: white;
-    text-shadow: 2px 2px 2px black;
+    color: #6b6b6b;
+}
+
+.titlePre {
+    flex: 0 0 auto;
+    font-size: 24pt;
+    font-family: Arial;
+    font-weight: bold;
+    font-style: italic;
+    color: #7e90de;
 }
 
 .version {

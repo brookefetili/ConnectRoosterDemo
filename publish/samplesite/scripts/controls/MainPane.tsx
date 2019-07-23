@@ -4,9 +4,8 @@ import BuildInPluginState from './BuildInPluginState';
 import Editor from './editor/Editor';
 import MainPaneBase from './MainPaneBase';
 import Ribbon from './ribbon/Ribbon';
-import SidePane from './sidePane/SidePane';
 import TitleBar from './titleBar/TitleBar';
-import { getAllPluginArray, getPlugins, getSidePanePluginArray } from './plugins';
+import { getAllPluginArray, getPlugins } from './plugins';
 
 const styles = require('./MainPane.scss');
 
@@ -29,6 +28,16 @@ class MainPane extends MainPaneBase {
         return (
             <div className={styles.mainPane}>
                 <TitleBar className={styles.noGrow} />
+
+                <div className={styles.section}>
+                    <div className={styles.sectionText}>
+                        Consider your overall impact to the business through: Your key individual accomplishments, your results that built on the work, ideas or efforts of others, your contributions to the success of others and the resulting impact of each area. Apply a growth mindset and reflect on what you could have done differently for even greater results, consider what you learned.
+                    </div>
+                    <div className={styles.sectionHeader}>
+                        What contributions did you make this period and what was the resulting business impact?
+                    </div>
+                </div>
+
                 {this.state.showRibbon && (
                     <Ribbon
                         plugin={plugins.ribbon}
@@ -36,6 +45,7 @@ class MainPane extends MainPaneBase {
                         ref={plugins.ribbon.refCallback}
                     />
                 )}
+
                 <div className={styles.body}>
                     <Editor
                         plugins={getAllPluginArray(this.state.showSidePane)}
@@ -44,27 +54,6 @@ class MainPane extends MainPaneBase {
                         initState={plugins.editorOptions.getBuildInPluginState()}
                         undo={plugins.snapshot}
                     />
-                    {this.state.showSidePane ? (
-                        <>
-                            <div className={styles.resizer} onMouseDown={this.onMouseDown} />
-                            <SidePane
-                                ref={ref => (this.sidePane = ref)}
-                                plugins={getSidePanePluginArray()}
-                                className={`main-pane ${styles.sidePane}`}
-                            />
-                            <button
-                                className={`side-pane-toggle open ${styles.showSidePane}`}
-                                onClick={this.onHideSidePane}>
-                                <div>Hide side pane</div>
-                            </button>
-                        </>
-                    ) : (
-                        <button
-                            className={`side-pane-toggle closed ${styles.showSidePane}`}
-                            onClick={this.onShowSidePane}>
-                            <div>Show side pane</div>
-                        </button>
-                    )}
                 </div>
             </div>
         );
@@ -84,13 +73,6 @@ class MainPane extends MainPaneBase {
         });
     }
 
-    private onMouseDown = (e: React.MouseEvent<EventTarget>) => {
-        document.addEventListener('mousemove', this.onMouseMove, true);
-        document.addEventListener('mouseup', this.onMouseUp, true);
-        document.body.style.userSelect = 'none';
-        this.mouseX = e.pageX;
-    };
-
     private onMouseMove = (e: MouseEvent) => {
         this.sidePane.changeWidth(this.mouseX - e.pageX);
         this.mouseX = e.pageX;
@@ -100,19 +82,6 @@ class MainPane extends MainPaneBase {
         document.removeEventListener('mousemove', this.onMouseMove, true);
         document.removeEventListener('mouseup', this.onMouseUp, true);
         document.body.style.userSelect = '';
-    };
-
-    private onShowSidePane = () => {
-        this.setState({
-            showSidePane: true,
-        });
-    };
-
-    private onHideSidePane = () => {
-        this.setState({
-            showSidePane: false,
-        });
-        window.location.hash = '';
     };
 }
 
