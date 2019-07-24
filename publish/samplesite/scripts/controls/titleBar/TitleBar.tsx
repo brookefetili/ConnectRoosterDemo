@@ -19,7 +19,7 @@ export default class TitleBar extends React.Component<TitleBarProps, {}> {
                     <span className={styles.titleText}>HR</span>
                 </div>
                 <div className={styles.title}>
-                    <span className={styles.titleText}>web / Connect</span>
+                    <span className={styles.titleText}>web / Fake Connect</span>
                 </div>
                 <div className={styles.version}>{(window as WindowHack).roosterJsVer || ''}</div>
                 <div className={styles.links}>
