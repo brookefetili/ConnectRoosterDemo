@@ -36,6 +36,9 @@ class MainPane extends MainPaneBase {
                     <div className={styles.sectionHeader}>
                         What contributions did you make this period and what was the resulting business impact?
                     </div>
+                    <div className={styles.employeeComments}>
+                        Employee comments
+                    </div>
                 </div>
 
                 {this.state.showRibbon && (

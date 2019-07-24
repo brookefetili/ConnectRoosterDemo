@@ -63,6 +63,7 @@ export default class Editor extends React.Component<EditorProps, BuildInPluginSt
         if (editorInstance == null) {
             editorInstance = this.editor;
         }
+        this.editor.setContent("<i>Does your work align with your core priorities? Discuss with your manager if your core priorities need to be updated. What will you do to activate the shared core priority for diversity & inclusion this upcoming period?</i>");
     }
 
     componentWillUnmount() {
